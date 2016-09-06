@@ -11,7 +11,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/blacksonic/angular2-testing-ground.git"
-  }
+  },
   "author": {
     "name": "blacksonic",
     "email": "soos.gabor86@gmail.com"
@@ -33,9 +33,10 @@
     "zone.js": "0.6.17"
   },
   "devDependencies": {
-    "@types/core-js": "0.9.32",
-    "@types/node": "6.0.38",
-    "@types/webpack": "1.12.33",
+    "@types/jasmine": "^2.2.29",
+    "@types/core-js": "^0.9.32",
+    "@types/node": "^6.0.38",
+    "@types/webpack": "^1.12.33",
     "copy-webpack-plugin": "3.0.1",
     "jasmine-core": "2.5.0",
     "karma": "1.2.0",

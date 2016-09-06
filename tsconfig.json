@@ -7,14 +7,18 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "types": [
+      "jasmine",
+      "node",
+      "core-js",
+      "webpack"
+    ]
   },
   "angularCompilerOptions": {
     "debug": true
   },
-  "files": [
-    "typings/index.d.ts"
-  ],
+  "files": [],
   "exclude": [
     "node_modules",
     "dist"
