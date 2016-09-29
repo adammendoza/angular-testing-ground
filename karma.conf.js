@@ -12,8 +12,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      { pattern: 'src/main.test.ts' },
-      { pattern: 'src/css/*.css', included: false, served: true }
+      { pattern: 'src/main.test.ts' }
     ],
 
     proxies: {
