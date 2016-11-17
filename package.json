@@ -18,7 +18,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "angular2-bundle": "2.2.0"
+    "angular2-bundle": "2.2.1"
   },
   "devDependencies": {
     "@types/jasmine": "2.5.38",
