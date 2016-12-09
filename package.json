@@ -31,7 +31,7 @@
     "zone.js": "0.6.26"
   },
   "devDependencies": {
-    "@types/core-js": "0.9.34",
+    "@types/core-js": "0.9.35",
     "@types/jasmine": "2.5.38",
     "@types/node": "6.0.48",
     "@types/webpack": "2.0.0",
