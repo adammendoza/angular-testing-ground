@@ -14,5 +14,7 @@ TestBed.initTestEnvironment(
   platformBrowserDynamicTesting()
 );
 
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
+
 let testContext = (<any>require).context('./app', true, /\.spec\.ts/);
 testContext.keys().forEach(testContext);
