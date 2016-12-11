@@ -29,7 +29,7 @@ describe('GithubService', () => {
     });
   });
 
-  beforeEach(inject([GithubService, MockBackend], (github: GithubService, mockBackend: MockBackend) => {
+  beforeEach(inject([GithubService, MockBackend], (github, mockBackend) => {
     subject = github;
     backend = mockBackend;
   }));
