@@ -3,7 +3,7 @@ import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod } fr
 import { Provider } from '@angular/core';
 
 interface BackendExpectationOptions {
-  url: string; body: string; method: RequestMethod
+  url: string; body?: string; method: RequestMethod
 }
 
 export class BackendExpectation {
@@ -13,9 +13,11 @@ export class BackendExpectation {
 
   constructor(private options: BackendExpectationOptions) {}
 
-  respond(body: string) {
+  respond(body: string | Object) {
     this.status = 200;
-    this.body = body;
+    this.body = typeof body === 'string'
+      ? body
+      : JSON.stringify(body);
   }
 
   verify(connection: MockConnection) {
@@ -68,7 +70,7 @@ export class FakeBackend extends MockBackend {
   }
 
   expectGET(url: string) {
-    return this._addExpectation({ url, body: '', method: RequestMethod.Get });
+    return this._addExpectation({ url, method: RequestMethod.Get });
   }
 
   flush() {

@@ -1,4 +1,4 @@
-import { TestBed, inject, fakeAsync } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { GithubService } from './github.service';
 import { FakeBackend } from './fake-backend';
 
@@ -29,40 +29,14 @@ describe('GithubServiceRefactored', () => {
     backend.verifyNoPendingRequests();
   });
 
-  it('should get profile data of user 1', (done) => {
+  it('should get profile data of user', (done) => {
     backend
       .expectGET('https://api.github.com/users/blacksonic')
-      .respond(JSON.stringify(profileInfo));
+      .respond(profileInfo);
 
     subject.getProfile('blacksonic').subscribe((response) => {
       expect(response).toEqual(profileInfo);
       done();
     });
   });
-
-  it('should get profile data of user 2', (done) => {
-    backend
-      .expectGET('https://api.github.com/users/blacksonic')
-      .respond(JSON.stringify(profileInfo));
-
-    subject.getProfile('blacksonic').subscribe((response) => {
-      expect(response).toEqual(profileInfo);
-      done();
-    });
-  });
-
-  // it('should be called with proper arguments', (done) => {
-  //   backend.connections.subscribe((connection: MockConnection) => {
-  //     expect(connection.request.url).toEqual('https://api.github.com/users/blacksonic');
-  //     expect(connection.request.method).toEqual(RequestMethod.Get);
-  //
-  //     let options = new ResponseOptions({
-  //       body: JSON.stringify(profileInfo)
-  //     });
-  //
-  //     connection.mockRespond(new Response(options));
-  //   });
-  //
-  //   subject.getProfile('blacksonic').subscribe(() => { done(); });
-  // });
 });
