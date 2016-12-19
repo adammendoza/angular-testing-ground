@@ -3,7 +3,7 @@ import { MockBackend, MockConnection } from '@angular/http/testing';
 import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod, ResponseContentType } from '@angular/http';
 import { Auth0Service } from './auth0.service';
 
-describe('GithubService', () => {
+describe('Auth0Service', () => {
   let subject: Auth0Service;
   let backend: MockBackend;
   let responseForm = '<form />';
