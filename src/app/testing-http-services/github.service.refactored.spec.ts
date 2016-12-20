@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { GithubService } from './github.service';
-import { FakeBackend } from '../fake-backend';
+import { FakeBackend } from 'angular2-http-testing';
 
 describe('GithubServiceRefactored', () => {
   let subject: GithubService;
