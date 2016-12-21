@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { Auth0Service } from './auth0.service';
-import { FakeBackend } from 'angular2-http-testing';
+import { FakeBackend } from 'ngx-http-test';
 
 describe('Auth0ServiceRefactored', () => {
   let subject: Auth0Service;

@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { GithubService } from './github.service';
-import { FakeBackend } from 'angular2-http-testing';
+import { FakeBackend } from 'ngx-http-test';
 
 describe('GithubServiceRefactored', () => {
   let subject: GithubService;
@@ -31,7 +31,7 @@ describe('GithubServiceRefactored', () => {
 
   it('should get profile data of user', (done) => {
     backend
-      .expectGET('https://api.github.com/users/blacksonic')
+      .expectGet('https://api.github.com/users/blacksonic')
       .respond(profileInfo);
 
     subject.getProfile('blacksonic').subscribe((response) => {
