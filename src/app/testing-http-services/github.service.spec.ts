@@ -36,9 +36,7 @@ describe('GithubService', () => {
 
   it('should get profile data of user', (done) => {
     backend.connections.subscribe((connection: MockConnection) => {
-      let options = new ResponseOptions({
-        body: JSON.stringify(profileInfo)
-      });
+      let options = new ResponseOptions({ body: profileInfo });
 
       connection.mockRespond(new Response(options));
     });
@@ -54,9 +52,7 @@ describe('GithubService', () => {
       expect(connection.request.url).toEqual('https://api.github.com/users/blacksonic');
       expect(connection.request.method).toEqual(RequestMethod.Get);
 
-      let options = new ResponseOptions({
-        body: JSON.stringify(profileInfo)
-      });
+      let options = new ResponseOptions({ body: profileInfo });
 
       connection.mockRespond(new Response(options));
     });
