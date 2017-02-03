@@ -5,7 +5,6 @@ let path = require('path');
 
 module.exports = {
   entry: {
-    'polyfill': './src/polyfill.ts',
     'vendor': './src/vendor.ts',
     'main': './src/main.ts',
   },
@@ -24,7 +23,7 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(true),
-    new webpack.optimize.CommonsChunkPlugin({ name: ['main', 'vendor', 'polyfill'], minChunks: Infinity }),
+    new webpack.optimize.CommonsChunkPlugin({ name: ['main', 'vendor'], minChunks: Infinity }),
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       mangle: { screw_ie8 : true },

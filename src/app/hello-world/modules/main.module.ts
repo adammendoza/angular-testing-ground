@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HelloAppComponent } from './app/hello-world/components/hello-app/hello-app.component';
-import { PageService } from './app/hello-world/services/page/page.service';
+import { HelloAppComponent } from '../components/hello-app/hello-app.component';
+import { PageService } from '../services/page/page.service';
 
 @NgModule({
   bootstrap: [HelloAppComponent],

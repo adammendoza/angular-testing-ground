@@ -12,7 +12,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      { pattern: 'src/main.test.ts' }
+      { pattern: 'src/test.ts' }
     ],
 
     proxies: {
@@ -26,7 +26,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/main.test.ts': ['webpack', 'sourcemap']
+      'src/test.ts': ['webpack', 'sourcemap']
     },
 
     // test results reporter to use
