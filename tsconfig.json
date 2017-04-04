@@ -13,7 +13,8 @@
       "node",
       "core-js",
       "webpack"
-    ]
+    ],
+    "lib": ["es2017", "dom"]
   },
   "angularCompilerOptions": {
     "debug": true
