@@ -52,6 +52,11 @@ module.exports = function(config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['PhantomJS'],
 
+    browserConsoleLogOptions: {
+      terminal: true,
+      level: "log"
+    },
+
     // Concurrency level
     // how many browser should be started simultanous
     concurrency: Infinity,
