@@ -59,7 +59,7 @@ describe('LoginForm', () => {
         expect(password).toEqual(expectedPassword);
       });
 
-      element.querySelector('.btn-primary').click();
+      element.querySelector('button[type="submit"]').click();
     });
   });
 
@@ -105,7 +105,7 @@ describe('LoginForm', () => {
 
       fixture.detectChanges();
 
-      element.querySelector('.btn-primary').click();
+      element.querySelector('button[type="submit"]').click();
 
       expect(component.storedEmail).toEqual(expectedEmail);
       expect(component.storedPassword).toEqual(expectedPassword);
