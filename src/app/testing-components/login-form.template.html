@@ -1,8 +1,6 @@
 <form (ngSubmit)="onSubmit(loginForm.value)" [formGroup]="loginForm">
-    <label for="login-email">Email</label>
     <input type="text" formControlName="email" id="login-email">
 
-    <label for="login-password">Password</label>
     <input type="password" formControlName="password" id="login-password">
 
     <button type="submit">Login</button>
