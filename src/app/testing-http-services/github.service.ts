@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class GithubService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   getProfile(userName: string) {
     return this.http
-      .get(`https://api.github.com/users/${userName}`)
-      .map((response: Response) => response.json());
+      .get(`https://api.github.com/users/${userName}`);
   }
 }

@@ -1,59 +1,51 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod, ResponseContentType } from '@angular/http';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Auth0Service } from './auth0.service';
+import { HttpRequest } from '@angular/common/http';
 
 describe('Auth0Service', () => {
-  let subject: Auth0Service;
-  let backend: MockBackend;
-  let responseForm = '<form />';
+  const responseForm = '<form />';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        Auth0Service,
-        MockBackend,
-        BaseRequestOptions,
-        {
-          provide: Http,
-          useFactory: (mockBackend, defaultOptions) => {
-            return new Http(mockBackend, defaultOptions);
-          },
-          deps: [MockBackend, BaseRequestOptions]
-        }
-      ]
+      imports: [HttpClientTestingModule],
+      providers: [Auth0Service]
     });
   });
 
-  beforeEach(inject([Auth0Service, MockBackend], (auth0, mockBackend) => {
-    subject = auth0;
-    backend = mockBackend;
-  }));
+  it('should be called with proper arguments', () => {
+    const auth0Service = TestBed.get(Auth0Service);
+    const http = TestBed.get(HttpTestingController);
+    let loginResponse;
 
-  it('should be called with proper arguments', (done) => {
-    backend.connections.subscribe((connection: MockConnection) => {
-      expect(connection.request.url).toEqual('https://blacksonic.eu.auth0.com.auth0.com/usernamepassword/login');
-      expect(connection.request.method).toEqual(RequestMethod.Post);
-      expect(connection.request.headers.get('Content-Type')).toEqual('application/json');
-      expect(connection.request.getBody()).toEqual(JSON.stringify(
-        {
-          username: 'blacksonic',
-          password: 'secret',
-          client_id: 'YOUR_CLIENT_ID'
-        }, null, 2
-      ));
-      // expect(connection.request.detectContentType()).toEqual(ResponseContentType.Json);
-
-      let options = new ResponseOptions({
-        body: responseForm
-      });
-
-      connection.mockRespond(new Response(options));
+    auth0Service.login('blacksonic', 'secret').subscribe((response) => {
+      loginResponse = response;
     });
 
-    subject.login('blacksonic', 'secret').subscribe((response) => {
-      expect(response).toEqual(responseForm);
-      done();
+    http.expectOne({
+      url: 'https://blacksonic.eu.auth0.com.auth0.com/usernamepassword/login',
+      method: 'POST'
+    }).flush(responseForm);
+    expect(loginResponse).toEqual(responseForm);
+  });
+
+  it('should be called with proper arguments and headers plus body', () => {
+    const auth0Service = TestBed.get(Auth0Service);
+    const http = TestBed.get(HttpTestingController);
+    let loginResponse;
+
+    auth0Service.login('blacksonic', 'secret').subscribe((response) => {
+      loginResponse = response;
     });
+
+    http.expectOne((request: HttpRequest<any>) => {
+      return request.method == 'POST'
+        && request.url == 'https://blacksonic.eu.auth0.com.auth0.com/usernamepassword/login'
+        && JSON.stringify(request.body) === JSON.stringify({
+          username: 'blacksonic', password: 'secret', client_id: 'YOUR_CLIENT_ID'
+        })
+        && request.headers.get('Content-Type') === 'application/json';
+    }).flush(responseForm);
+    expect(loginResponse).toEqual(responseForm);
   });
 });

@@ -19,7 +19,6 @@
   "angularCompilerOptions": {
     "debug": true
   },
-  "files": [],
   "exclude": [
     "node_modules",
     "dist"

@@ -1,12 +1,9 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod } from '@angular/http';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { GithubService } from './github.service';
 
 describe('GithubService', () => {
-  let subject: GithubService;
-  let backend: MockBackend;
-  let profileInfo = {
+  const profileInfo = {
     login: 'blacksonic',
     id: 602571,
     name: 'Gábor Soós'
@@ -14,49 +11,21 @@ describe('GithubService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        GithubService,
-        MockBackend,
-        BaseRequestOptions,
-        {
-          provide: Http,
-          useFactory: (mockBackend, defaultOptions) => {
-            return new Http(mockBackend, defaultOptions);
-          },
-          deps: [MockBackend, BaseRequestOptions]
-        }
-      ]
+      imports: [HttpClientTestingModule],
+      providers: [GithubService]
     });
   });
 
-  beforeEach(inject([GithubService, MockBackend], (github, mockBackend) => {
-    subject = github;
-    backend = mockBackend;
-  }));
+  it('should get profile data of user', () => {
+    const githubService = TestBed.get(GithubService);
+    const http = TestBed.get(HttpTestingController);
+    let profileResponse;
 
-  it('should get profile data of user', (done) => {
-    backend.connections.subscribe((connection: MockConnection) => {
-      let options = new ResponseOptions({ body: profileInfo });
-
-      connection.mockRespond(new Response(options));
+    githubService.getProfile('blacksonic').subscribe((response) => {
+      profileResponse = response;
     });
 
-    subject.getProfile('blacksonic').subscribe((response) => {
-      expect(response).toEqual(profileInfo);
-      done();
-    });
-  });
-
-  it('should be called with proper arguments', (done) => {
-    backend.connections.subscribe((connection: MockConnection) => {
-      expect(connection.request.url).toEqual('https://api.github.com/users/blacksonic');
-      expect(connection.request.method).toEqual(RequestMethod.Get);
-
-      let options = new ResponseOptions({ body: profileInfo });
-
-      connection.mockRespond(new Response(options));
-    });
-
-    subject.getProfile('blacksonic').subscribe(() => { done(); });
+    http.expectOne('https://api.github.com/users/blacksonic').flush(profileInfo);
+    expect(profileResponse).toEqual(profileInfo);
   });
 });
