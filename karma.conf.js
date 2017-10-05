@@ -15,6 +15,10 @@ module.exports = function(config) {
       { pattern: 'src/test.ts' }
     ],
 
+    mime: {
+      'text/x-typescript': ['ts', 'tsx']
+    },
+
     proxies: {
       '/css/': '/base/src/css/'
     },
@@ -50,7 +54,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['ChromeHeadless'],
 
     browserConsoleLogOptions: {
       terminal: true,
