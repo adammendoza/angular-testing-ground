@@ -10,11 +10,8 @@ describe('Car', () => {
     TestBed.configureTestingModule({
       providers: [Engine, Car]
     });
+    subject = TestBed.get(Car);
   });
-
-  beforeEach(inject([Car], (car: Car) => {
-    subject = car;
-  }));
 
   it('should display name with engine', () => {
     expect(subject.getName()).toEqual('Car with Basic engine(150 HP)');
@@ -35,11 +32,8 @@ describe('CarMock', () => {
 
     spyOn(Engine.prototype, 'getHorsepower').and.returnValue(400);
     spyOn(Engine.prototype, 'getName').and.returnValue('V8 engine');
+    subject = TestBed.get(Car);
   });
-
-  beforeEach(inject([Car], (car: Car) => {
-    subject = car;
-  }));
 
   it('should display name with engine', () => {
     expect(subject.getName()).toEqual('Car with V8 engine(400 HP)');
@@ -67,11 +61,8 @@ describe('CarMockDI', () => {
         Car
       ]
     });
+    subject = TestBed.get(Car);
   });
-
-  beforeEach(inject([Car], (car: Car) => {
-    subject = car;
-  }));
 
   it('should display name with engine', () => {
     expect(subject.getName()).toEqual('Car with V8 engine(400 HP)');
