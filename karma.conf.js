@@ -1,5 +1,5 @@
 'use strict';
-let path = require('path');
+const path = require('path');
 
 module.exports = function(config) {
   config.set({
@@ -34,7 +34,7 @@ module.exports = function(config) {
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['dots'],
 
-    webpack: require('./webpack.test.config'),
+    webpack: require('./webpack.config'),
 
     webpackServer: { noInfo: true },
 
